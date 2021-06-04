@@ -1,0 +1,19 @@
+.headingclass {
+  text-align: center;
+}
+.nutrisearch {
+  display: flex;
+  justify-content: center;
+}
+.nutrisearchbtn {
+  position: relative;
+  top: 5px;
+  text-align: center;
+}
+.textareasearch {
+  border-radius: 10px;
+}
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}

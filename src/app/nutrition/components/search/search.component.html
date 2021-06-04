@@ -1,0 +1,25 @@
+<div class="headingclass">
+    <h1>Nutrition Search</h1>
+</div>
+<div class="nutrisearch">
+    <div class="form-group">
+        <form class="example-form" [formGroup]="nutrisearch" (ngSubmit)="onsubmit()">
+
+            <div class="">
+                <textarea class="form-control" placeholder="1 cup rice,10 oz chickpeas" ng-list="/\n/" rows="4"
+                    cols="40" name="nutri" id="nutri" formControlName="nutri"></textarea>
+            </div>
+
+
+            <div class="nutrisearchbtn">
+                <button type="submit" class="btn btn-info"
+                    [disabled]="nutrisearch.controls.nutri.status=='INVALID'">Search</button>
+            </div>
+            <!-- {{result | json}} -->
+
+
+        </form>
+    </div>
+</div>
+
+<!-- <app-searchresult></app-searchresult> -->
