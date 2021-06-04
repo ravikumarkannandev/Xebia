@@ -25,20 +25,21 @@
 
                     </tbody>
                 </table>
-                <div class="buttonsection btn-toolbar">
+                <div *ngIf="result" class="buttonsection btn-toolbar">
                     <div class="btn-toolbar pull-right">
                         <button type="button" class="btn btn-primary mr-3 butl" (click)="opendetaileddata()">Total
                             Nutrients</button>
-                        <button type="button" class="btn btn-primary mr-3 butl">Nutrients Fact</button>
+                        <button type="button" class="btn btn-primary mr-3 butl" (click)="opendnutrfact()">Nutrients
+                            Fact</button>
 
                     </div>
 
                 </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="result">
                 <div class="col">
                     <div>
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" *ngIf="showtotalnutridetails">
                             <thead>
                                 <tr>
                                     <th colspan="4">
@@ -61,22 +62,22 @@
                                         {{totalNutrientsKCal.ENERC_KCAL['unit']}}</td>
 
                                 </tr>
-                                <tr *ngIf="totalNutrientsKCal.PROCNT_KCAL['label']">
-                                    <th scope="row">1</th>
+                                <tr>
+                                    <th scope="row">2</th>
                                     <td>{{totalNutrientsKCal.PROCNT_KCAL['label']}}</td>
                                     <td>{{totalNutrientsKCal.PROCNT_KCAL['quantity'] |number : '1.1-1'}}
                                         {{totalNutrientsKCal.PROCNT_KCAL['unit']}}</td>
 
                                 </tr>
-                                <tr *ngIf="totalNutrientsKCal.FAT_KCAL['label']">
-                                    <th scope="row">1</th>
+                                <tr>
+                                    <th scope="row">3</th>
                                     <td>{{totalNutrientsKCal.FAT_KCAL['label']}}</td>
                                     <td>{{totalNutrientsKCal.FAT_KCAL['quantity'] |number : '1.1-1'}}
                                         {{totalNutrientsKCal.FAT_KCAL['unit']}}</td>
 
                                 </tr>
                                 <tr *ngIf="totalNutrientsKCal.CHOCDF_KCAL['label']">
-                                    <th scope="row">1</th>
+                                    <th scope="row">4</th>
                                     <td>{{totalNutrientsKCal.CHOCDF_KCAL['label']}}</td>
                                     <td>{{totalNutrientsKCal.CHOCDF_KCAL['quantity'] |number : '1.1-1'}}
                                         {{totalNutrientsKCal.CHOCDF_KCAL['unit']}}</td>
@@ -88,7 +89,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" *ngIf="shownutrifacts">
                         <thead>
                             <tr>
                                 <th colspan="4">
@@ -104,35 +105,35 @@
                         </thead>
                         <tbody>
 
-                            <tr *ngIf="totalNutrients.FAT['label']">
-                                <th scope="row" *ngIf="totalNutrients.FAT['label']">1</th>
+                            <tr>
+                                <th scope="row">1</th>
                                 <td>{{totalNutrients.FAT['label']}}</td>
                                 <td>{{totalNutrients.FAT['quantity'] |number : '1.1-1'}}
                                     {{totalNutrients.FAT['unit']}}</td>
                                 <td>{{totalDaily.FAT['quantity'] |number : '1.0-0'}}%</td>
                             </tr>
-                            <tr *ngIf="totalNutrients.FASAT['label']">
+                            <tr>
                                 <th scope="row">2</th>
                                 <td>{{totalNutrients.FASAT['label']}}</td>
                                 <td>{{totalNutrients.FASAT['quantity'] |number : '1.1-1'}}
                                     {{totalNutrients.FASAT['unit']}}</td>
                                 <td>{{totalDaily.FASAT['quantity'] |number : '1.0-0'}}%</td>
                             </tr>
-                            <tr *ngIf="totalNutrients.CHOLE['label']">
+                            <tr>
                                 <th scope="row">3</th>
                                 <td>{{totalNutrients.CHOLE['label']}}</td>
                                 <td>{{totalNutrients.CHOLE['quantity'] |number : '1.1-1'}}
                                     {{totalNutrients.CHOLE['unit']}}</td>
                                 <td>{{totalDaily.CHOLE['quantity'] |number : '1.0-0'}}%</td>
                             </tr>
-                            <tr *ngIf="totalNutrients.NA['label']">
+                            <tr>
                                 <th scope="row">4</th>
                                 <td>{{totalNutrients.NA['label']}}</td>
                                 <td>{{totalNutrients.NA['quantity'] |number : '1.1-1'}}
                                     {{totalNutrients.NA['unit']}}</td>
                                 <td>{{totalDaily.NA['quantity'] |number : '1.0-0'}}%</td>
                             </tr>
-                            <tr *ngIf="totalNutrients.CHOCDF['label']">
+                            <tr>
                                 <th scope="row">5</th>
                                 <td>{{totalNutrients.CHOCDF['label']}}</td>
                                 <td>{{totalNutrients.CHOCDF['quantity'] |number : '1.1-1'}}
@@ -202,6 +203,7 @@
 
 
 
+
         </div>
 
     </div>
@@ -213,212 +215,6 @@
 
 
 
-    <div class="columnsContainer">
-
-        <div class="leftColumn1">
-
-        </div>
-
-        <div class="rightColumn">
-
-            <div>
-
-                <!-- <section class="performance-facts">
-                    <header class="performance-facts__header">
-                        <h1 class="performance-facts__title">Nutrition Facts</h1>
-                        <h6>By Ravikumar</h6>
-
-                    </header>
-                    <table class="table performance-facts__table">
-                        <thead>
-                            <tr>
-                                <th colspan="3" class="small-info">
-
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th colspan="2">
-                                    <b>Calories</b>
-                                    {{result.calories}}
-                                </th>
-                                <td>
-
-
-                                </td>
-                            </tr>
-                            <tr class="thick-row">
-                                <td colspan="3" class="small-info">
-                                    <b>% Daily Value*</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th colspan="2">
-                                    <b>Total {{totalNutrients.FAT['label']}}</b>
-                                    {{totalNutrients.FAT['quantity'] |number : '1.1-1'}}
-                                    {{totalNutrients.FAT['unit']}}
-                                </th>
-                                <td>
-                                    <b>{{totalDaily.FAT['quantity'] |number : '1.0-0'}}%</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="blank-cell">
-                                </td>
-                                <th>
-                                    {{totalNutrients.FASAT['label']}} Fat
-                                    {{totalNutrients.FASAT['quantity'] |number : '1.1-1'}}
-                                    {{totalNutrients.FASAT['unit']}}
-                                </th>
-                                <td>
-                                    <b>{{totalDaily.FASAT['quantity'] |number : '1.0-0'}}%</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="blank-cell">
-                                </td>
-                                <th>
-                                    Trans Fat
-                                    0g
-                                </th>
-                                <td>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th colspan="2">
-                                    <b> {{totalNutrients.CHOLE['label']}} </b>
-                                    {{totalNutrients.CHOLE['quantity'] |number : '1.1-1'}}
-                                    {{totalNutrients.CHOLE['unit']}}
-
-                                </th>
-                                <td>
-                                    <b>{{totalDaily.CHOLE['quantity'] |number : '1.0-0'}}%</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th colspan="2">
-                                    <b>{{totalNutrients.NA['label']}}</b>
-                                    {{totalNutrients.NA['quantity'] |number : '1.1-1'}}
-                                    {{totalNutrients.NA['unit']}}
-                                </th>
-                                <td>
-                                    <b>{{totalDaily.NA['quantity'] |number : '1.0-0'}}%</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th colspan="2">
-                                    <b>Total Carbohydrate</b>
-                                    {{totalNutrients.CHOCDF['quantity'] |number : '1.1-1'}}
-                                    {{totalNutrients.CHOCDF['unit']}}
-                                </th>
-                                <td>
-                                    <b>{{totalDaily.CHOCDF['quantity'] |number : '1.0-0'}}%</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="blank-cell">
-                                </td>
-                                <th>
-                                    Dietary {{totalNutrients.FIBTG['label']}}
-                                    {{totalNutrients.FIBTG['quantity'] |number : '1.1-1'}}
-                                    {{totalNutrients.FIBTG['unit']}}
-
-                                </th>
-                                <td>
-                                    <b>{{totalDaily.FIBTG['quantity'] |number : '1.0-0'}}%</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="blank-cell">
-                                </td>
-                                <th>
-                                    {{totalNutrients.SUGAR['label']}}
-                                    {{totalNutrients.SUGAR['quantity'] |number : '1.1-1'}}
-                                    {{totalNutrients.SUGAR['unit']}}
-
-                                </th>
-                                <td>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <th colspan="2">
-                                    <b>Total {{totalNutrients.PROCNT['label']}}</b>
-                                    {{totalNutrients.PROCNT['quantity'] |number : '1.1-1'}}
-                                    {{totalNutrients.PROCNT['unit']}}
-                                </th>
-                                <td>
-                                    <b>{{totalDaily.PROCNT['quantity'] |number : '1.0-0'}}%</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="blank-cell">
-                                </td>
-                                <th>
-                                    {{totalNutrients.VITA_RAE['label']}}
-                                    {{totalNutrients.VITA_RAE['quantity'] |number : '1.1-1'}}
-                                    {{totalNutrients.VITA_RAE['unit']}}
-
-                                </th>
-                                <td>
-                                    <b>{{totalDaily.VITA_RAE['quantity'] |number : '1.0-0'}}%</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="blank-cell">
-                                </td>
-                                <th>
-                                    {{totalNutrients.VITC['label']}}
-                                    {{totalNutrients.VITC['quantity'] |number : '1.1-1'}}
-                                    {{totalNutrients.VITC['unit']}}
-
-                                </th>
-                                <td>
-                                    <b>{{totalDaily.VITC['quantity'] |number : '1.0-0'}}%</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="blank-cell">
-                                </td>
-                                <th>
-                                    {{totalNutrients.CA['label']}}
-                                    {{totalNutrients.CA['quantity'] |number : '1.1-1'}}
-                                    {{totalNutrients.CA['unit']}}
-
-                                </th>
-                                <td>
-                                    <b>{{totalDaily.CA['quantity'] |number : '1.0-0'}}%</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="blank-cell">
-                                </td>
-                                <th>
-                                    {{totalNutrients.FE['label']}}
-                                    {{totalNutrients.FE['quantity'] |number : '1.1-1'}}
-                                    {{totalNutrients.FE['unit']}}
-
-                                </th>
-                                <td>
-                                    <b>{{totalDaily.FE['quantity'] |number : '1.0-0'}}%</b>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-
-
-
-                </section> -->
-            </div>
-
-
-
-
-        </div>
-
-    </div>
 
 
 </div>

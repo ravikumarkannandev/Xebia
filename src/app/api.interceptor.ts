@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest,HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { tap, map } from 'rxjs/operators';
-
+import { retry, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 @Injectable()
 export class ParameterInterceptor implements HttpInterceptor{
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -17,3 +18,23 @@ export class ParameterInterceptor implements HttpInterceptor{
     )
     } 
 }
+export class HttpErrorInterceptor implements HttpInterceptor {
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+      return next.handle(request)
+        .pipe(
+          retry(1),
+          catchError((error: HttpErrorResponse) => {
+            let errorMessage = '';
+            if (error.error instanceof ErrorEvent) {
+            
+              errorMessage = `Error: ${error.error.message}`;
+            } else {
+             
+              errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+            }
+            window.alert("Please Search With Correct Ingredients");
+            return throwError(errorMessage);
+          })
+        )
+    }
+  }

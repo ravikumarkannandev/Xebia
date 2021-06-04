@@ -11,12 +11,15 @@ export class SearchresultComponent implements OnInit {
 
   constructor(private service:SearchService,private ls:localstorageService ) { }
   result:any;
+  error:string;
   totalNutrients:any;
   totalDaily:any;
   ingredients:any;
   lsing:any;
   showdetaleddata:boolean;
   totalNutrientsKCal:any;
+  showtotalnutridetails:boolean=false;
+  shownutrifacts:boolean=false;
   ngOnInit(): void {
     //this.lsing=[1];
    this.lsing=this.ls.get('usering');
@@ -27,12 +30,19 @@ export class SearchresultComponent implements OnInit {
         this.totalDaily=this.result.totalDaily;
         this.ingredients=this.result.ingredients;
         this.totalNutrientsKCal= this.result.totalNutrientsKCal;
+    }, error => {
+      alert("eroor");
+      this.error = error;
+      
     }) 
    
   
   }
   opendetaileddata(){
-
+    this.showtotalnutridetails = !this.showtotalnutridetails;
+  }
+  opendnutrfact(){
+    this.shownutrifacts = !this.shownutrifacts;
   }
  
 }

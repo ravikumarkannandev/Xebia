@@ -8,7 +8,7 @@ import { SearchresultComponent } from './components/searchresult/searchresult.co
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 
-import { ParameterInterceptor } from '../api.interceptor';
+import { HttpErrorInterceptor, ParameterInterceptor } from '../api.interceptor';
 import { SearchService } from './service/search.service';
 
 @NgModule({
@@ -30,6 +30,10 @@ import { SearchService } from './service/search.service';
       provide: HTTP_INTERCEPTORS,
       useClass: ParameterInterceptor,
       multi: true
-  }]
+  },{
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpErrorInterceptor,
+    multi: true
+}]
 })
 export class NutritionModule { }
