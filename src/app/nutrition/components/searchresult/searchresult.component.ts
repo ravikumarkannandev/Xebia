@@ -21,20 +21,17 @@ export class SearchresultComponent implements OnInit {
   showtotalnutridetails:boolean=false;
   shownutrifacts:boolean=false;
   ngOnInit(): void {
-    //this.lsing=[1];
-   this.lsing=this.ls.get('usering');
-    console.log(this.lsing);
+    
+    this.lsing=this.ls.get('usering');
     this.service.geingredient().subscribe(data => {
-        this.result=data;
-        this.totalNutrients=this.result.totalNutrients;
-        this.totalDaily=this.result.totalDaily;
-        this.ingredients=this.result.ingredients;
-        this.totalNutrientsKCal= this.result.totalNutrientsKCal;
+    this.result=data;
+    this.totalNutrients=this.result.totalNutrients;
+    this.totalDaily=this.result.totalDaily;
+    this.ingredients=this.result.ingredients;
+    this.totalNutrientsKCal= this.result.totalNutrientsKCal;
     }, error => {
-      alert("eroor");
-      this.error = error;
-      
-    }) 
+    this.error = error;
+   }) 
    
   
   }

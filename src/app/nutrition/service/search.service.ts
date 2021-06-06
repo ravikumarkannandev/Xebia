@@ -7,9 +7,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 })
 export class SearchService {
   getingdata: any;
-
   constructor(private httpclient:HttpClient) { }
-
   public nutridata = new BehaviorSubject<any>(false);
 
   setingredient(obj: any) {
@@ -21,13 +19,12 @@ export class SearchService {
   }
 
   geingredient() {
-      return this.nutridata.asObservable();
+    return this.nutridata.asObservable();
     
   }
 
 
   getnutridetails(obj){
-      
     const id='app_id=a54f2c4d&app_key=b5e8b2d14d3fac05cb4eb4f9b5326978';
     return this.httpclient.post(id,obj);
   }

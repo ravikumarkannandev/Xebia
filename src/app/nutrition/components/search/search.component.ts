@@ -22,6 +22,7 @@ export class SearchComponent implements OnInit {
     
   }
   private createform(){
+     /*********Ractive form validation Ravi_369**********/
     this.nutrisearch=this.fb.group({
       nutri:['',[Validators.required,nutrivalidatestring]],
     
@@ -30,28 +31,18 @@ export class SearchComponent implements OnInit {
     
  }
  onsubmit(){
-  
-  console.log("before submit");
-  console.log(this.nutrisearch.value['nutri']);
-  var dataarray=this.nutrisearch.value['nutri'].split("\n");
-  dataarray = dataarray.filter(function (el) {
-    return el != "";
-  });
-  console.log("after",dataarray);
-  const obj={ingr:dataarray};
-  
-  if (Object.keys(this.ls.get("usering")).length === 0) {
-    
-    this.ls.set("usering", dataarray);
-  } 
-  
-  
+   /*********on submit convert the string into the array by Ravi_369**********/
+      var dataarray=this.nutrisearch.value['nutri'].split("\n");
+      dataarray = dataarray.filter(function (el) {
+      return el != "";
+      });
+      const obj={ingr:dataarray};
+      if (Object.keys(this.ls.get("usering")).length === 0) {
+      this.ls.set("usering", dataarray);
+      } 
+      this.service.setingredient(obj);
+      this.router.navigate(['Searchresult']);
 
-  this.service.setingredient(obj);
-  this.router.navigate(['Searchresult']);
-
-  
-  
- }
+   }
 
 }
